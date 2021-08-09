@@ -15,11 +15,11 @@ class MobilpayGateway
         $this->initData();
     }
 
-    public function purchase($autoRedirect = true)
+    public function purchase($autoRedirect = true, $uo)
     {
         $gateway = Omnipay::create('MobilPay');
-        $gateway->setMerchantId(config('mobilpay.merchant_id'));
-        $gateway->setPublicKey(config('mobilpay.public_key_path'));
+        $gateway->setMerchantId(config('mobilpay.merchant_id' . '_' . $uo));
+        $gateway->setPublicKey(config('mobilpay.public_key_path' . '_' . $uo));
 
         $response = $gateway->purchase($this->data)->send();
 
@@ -30,10 +30,10 @@ class MobilpayGateway
         return $response;
     }
 
-    public function response($autoSendResponse = true)
+    public function response($autoSendResponse = true, $uo)
     {
         $gateway = Omnipay::create('MobilPay');
-        $gateway->setPrivateKey(config('mobilpay.private_key_path'));
+        $gateway->setPrivateKey(config('mobilpay.private_key_path' . '_' . $uo));
 
         $response = $gateway->completePurchase($_POST)->send();
 
