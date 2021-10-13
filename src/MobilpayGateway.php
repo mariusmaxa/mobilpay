@@ -20,7 +20,7 @@ class MobilpayGateway
         $gateway = Omnipay::create('MobilPay');
         $gateway->setMerchantId(config('mobilpay.merchant_id' . '_' . $uo));
         $gateway->setPublicKey(config('mobilpay.public_key_path' . '_' . $uo));
-        $gateway->setConfirmUrl(config('mobilpay.confirm_url_' . '_' . $uo));
+        $gateway->setConfirmUrl(config('mobilpay.confirm_url' . '_' . $uo));
 
         $response = $gateway->purchase($this->data)->send();
 

@@ -13,7 +13,7 @@ trait DataTrait
             'amount'     => '',
             'currency'   => config('mobilpay.currency'),
             'details'    => '',
-            'confirmUrl' => config('mobilpay.confirm_url'),
+        //    'confirmUrl' => config('mobilpay.confirm_url'),
             'returnUrl'  => config('mobilpay.return_url'),
             'cancelUrl'  => config('mobilpay.cancel_url'),
             'testMode'   => config('mobilpay.testMode'),
@@ -21,7 +21,7 @@ trait DataTrait
         ];
 
         //ensure absolute urls
-        foreach (['confirmUrl', 'returnUrl', 'cancelUrl'] as $var) {
+        foreach (['returnUrl', 'cancelUrl'] as $var) {
             if ($this->isRelativeUrl($this->data[$var])) {
                 $this->data[$var] = url($this->data[$var]);
             }
